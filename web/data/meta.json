@@ -1,0 +1,99 @@
+{
+ "schema_version": 1,
+ "build_id": "67dbb272b383961f",
+ "built_at": "2026-09-25T20:42:18.765672+00:00",
+ "n_games": 37202,
+ "min_games": 200,
+ "powers": [
+  "austria",
+  "england",
+  "france",
+  "germany",
+  "italy",
+  "russia",
+  "turkey"
+ ],
+ "year_phases": [
+  "S1901M",
+  "S1901R",
+  "F1901M",
+  "F1901R",
+  "W1901A"
+ ],
+ "press_levels": [
+  "no_press",
+  "press_with_msgs",
+  "public_press"
+ ],
+ "arrays": [
+  {
+   "name": "spring",
+   "type": "uint16",
+   "offset": 0,
+   "length": 260414
+  },
+  {
+   "name": "year",
+   "type": "uint16",
+   "offset": 520828,
+   "length": 260414
+  },
+  {
+   "name": "year_turns",
+   "type": "uint16",
+   "offset": 1041656,
+   "length": 306645
+  },
+  {
+   "name": "centers",
+   "type": "uint8",
+   "offset": 1654946,
+   "length": 260414
+  },
+  {
+   "name": "flags",
+   "type": "uint8",
+   "offset": 1915360,
+   "length": 37202
+  }
+ ],
+ "year_offsets": {
+  "austria": 0,
+  "england": 11952,
+  "france": 16165,
+  "germany": 24040,
+  "italy": 31820,
+  "russia": 38922,
+  "turkey": 56059
+ },
+ "bytes": 1952562,
+ "estimates": {
+  "model_id": "d58e6db798b49efd",
+  "models": {
+   "spring1901": {
+    "tier_1": {
+     "strength": 10,
+     "fit_games": 12317
+    },
+    "tiers_1_3": {
+     "strength": 10,
+     "fit_games": 31591
+    }
+   },
+   "year1901": {
+    "tier_1": {
+     "strength": 20,
+     "fit_games": 12317
+    },
+    "tiers_1_3": {
+     "strength": 10,
+     "fit_games": 31591
+    }
+   }
+  }
+ },
+ "files": {
+  "catalog.json.gz": 361369,
+  "games.bin.gz": 1062299
+ }
+}
