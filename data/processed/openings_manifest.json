@@ -1,0 +1,187 @@
+{
+  "schema_version": 1,
+  "built_at_utc": "2026-09-25T20:42:15.010210+00:00",
+  "polars_version": "1.44.2",
+  "python_version": "3.12.11",
+  "config": {
+    "min_games": 200,
+    "top_n": 10,
+    "confidence_level": 0.95
+  },
+  "counts": {
+    "candidate_games": 37203,
+    "excluded_non_s1901_games": 1,
+    "included_games": 37202,
+    "observations": 260414,
+    "distinct_openings": 1873,
+    "aggregate_rows": 8417
+  },
+  "inputs": [
+    {
+      "name": "games.parquet",
+      "size_bytes": 3112717,
+      "mtime_ns": 1789138012447904679,
+      "sha256": "914242d35b43b4f384dd2314e78a0734757088df67b1ea288c6b868d1eea60b4"
+    },
+    {
+      "name": "phases.parquet",
+      "size_bytes": 555814160,
+      "mtime_ns": 1789138797660844200,
+      "sha256": "5785ac8a77e9bc1163ca099493b8b92084a929948b92b1048ffe13bdd76c22e5"
+    },
+    {
+      "name": "game_outcomes.parquet",
+      "size_bytes": 4370591,
+      "mtime_ns": 1790351294819083451,
+      "sha256": "944e0efa44c68b0946449c4fcad576d2e09d823aea1053117cc870d51746b7a5"
+    }
+  ],
+  "sources": [
+    {
+      "name": "openings.py",
+      "size_bytes": 4761,
+      "mtime_ns": 1790368036181415785,
+      "sha256": "cbaf3fe35073aa735faa51c0b7ee0d935c716d24fa20e81cef5f479005e6b7cb"
+    },
+    {
+      "name": "__init__.py",
+      "size_bytes": 73,
+      "mtime_ns": 1790368036183615616,
+      "sha256": "22b909a5237a6455e90719cde77958b95f5eb2211325c204444c81e610d54a6f"
+    },
+    {
+      "name": "artifacts.py",
+      "size_bytes": 1650,
+      "mtime_ns": 1790368036185464447,
+      "sha256": "066673f7e58094e0c22403b442892aad489c4c15fbe3f74106307c1e8d97d801"
+    },
+    {
+      "name": "cohorts.py",
+      "size_bytes": 900,
+      "mtime_ns": 1790368036182291659,
+      "sha256": "2a05868cc8514cc3a09d5add242ea2b5e6778d966c5e4c0e5feb7d764f57b0a8"
+    },
+    {
+      "name": "exact_data.py",
+      "size_bytes": 6636,
+      "mtime_ns": 1790368036186767237,
+      "sha256": "f29712fedbc2476563192c175a63461e9734a9a6369b6f910e06928e2adcc9ac"
+    },
+    {
+      "name": "exact_pair_report.py",
+      "size_bytes": 5803,
+      "mtime_ns": 1790368036183241658,
+      "sha256": "afe5f85fe649cca433bf0432855ef889f9766c9b6563f6dbcd0a809f80be3ff7"
+    },
+    {
+      "name": "exact_pairs.py",
+      "size_bytes": 3492,
+      "mtime_ns": 1790368036185109781,
+      "sha256": "42dd9798320decae16913823daa24852c782a180738d0ccfdea3abc17d13c0e0"
+    },
+    {
+      "name": "exact_query.py",
+      "size_bytes": 5501,
+      "mtime_ns": 1790368036185917780,
+      "sha256": "0b9e483214e880ffad270d2488448defa20a6f5e9d074c0e2135bbca3155dbc7"
+    },
+    {
+      "name": "exact_report.py",
+      "size_bytes": 7010,
+      "mtime_ns": 1790368036183059533,
+      "sha256": "657e7154000c4b41a5c2171434ccf046d626734fcab198c2da19c4f87995b9a4"
+    },
+    {
+      "name": "opening_data.py",
+      "size_bytes": 5817,
+      "mtime_ns": 1790368036184739073,
+      "sha256": "24ead36ed9d017cd3feb89e44f158c355c35a967aa42c3bfa8ff4f051f0632d5"
+    },
+    {
+      "name": "opening_report.py",
+      "size_bytes": 5023,
+      "mtime_ns": 1790368036184338823,
+      "sha256": "633d7ba291901523af4d3a69bcc3b7b4133eeb6dd5e1e59cf8a17d3ed5823cfd"
+    },
+    {
+      "name": "opening_stats.py",
+      "size_bytes": 2951,
+      "mtime_ns": 1790368036182540367,
+      "sha256": "5041d9a7ed00b5e6d1a4e287ac73598896430c1e9b7d799d9f5029b7ca56a312"
+    },
+    {
+      "name": "score_benchmark.py",
+      "size_bytes": 7868,
+      "mtime_ns": 1790368036183992657,
+      "sha256": "74a131aef4aac1b20a7281274a90d2327721d7ab1d9f2e010a94b132363e2e82"
+    }
+  ],
+  "outputs": [
+    {
+      "name": "openings_observations.parquet",
+      "size_bytes": 2210707,
+      "mtime_ns": 1790368935006601091,
+      "sha256": "79122fb60365df6775c919e1ebcd44788319a0eae2f858e9459d98e70e3e082e"
+    },
+    {
+      "name": "openings_own.parquet",
+      "size_bytes": 342155,
+      "mtime_ns": 1790368935008742172,
+      "sha256": "da9066c4818dccd2a95a951be8cd0deffa4524370282cdd6ee9123cd6c97bd45"
+    },
+    {
+      "name": "openings_own.md",
+      "size_bytes": 61732,
+      "mtime_ns": 1790368935008986046,
+      "sha256": "dfe85e93af861ef56119f175a332ba6ddb6b6b3f687a5e3fda324f0c673ce037"
+    }
+  ],
+  "schemas": {
+    "observations": {
+      "game_id": "String",
+      "power": "String",
+      "press_level": "String",
+      "quality_tier": "Int64",
+      "opening_id": "String",
+      "orders": "List(String)",
+      "solo": "Boolean",
+      "survived": "Boolean",
+      "draw_vote": "Boolean",
+      "sos_score": "Float64"
+    },
+    "aggregates": {
+      "quality_group": "String",
+      "press_level": "String",
+      "power": "String",
+      "opening_id": "String",
+      "orders": "List(String)",
+      "n_games": "UInt32",
+      "n_solos": "UInt32",
+      "solo_rate": "Float64",
+      "survival_rate": "Float64",
+      "draw_rate": "Float64",
+      "mean_sos": "Float64",
+      "cohort_games": "UInt32",
+      "baseline_mean_sos": "Float64",
+      "baseline_solo_rate": "Float64",
+      "frequency": "Float64",
+      "sos_lift": "Float64",
+      "sos_se": "Float64",
+      "sparse": "Boolean",
+      "sos_ci_low": "Float64",
+      "sos_ci_high": "Float64",
+      "solo_ci_low": "Float64",
+      "solo_ci_high": "Float64"
+    }
+  },
+  "intervals": {
+    "solo": "wilson_95",
+    "mean_sos": "normal_95_clipped; null for n<2 or zero variance"
+  },
+  "timings_seconds": {
+    "input_fingerprints": 0.2324,
+    "extract_validate": 1.1885,
+    "aggregate": 0.0351,
+    "total_before_publish": 1.5166
+  }
+}
