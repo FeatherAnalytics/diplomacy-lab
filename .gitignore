@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[oc]
+.venv/
+build/
+dist/
+*.egg-info
+
+# Node (tests only; the site has no dependencies)
+node_modules/
+
+# OS and editor files
+.DS_Store
+
+# Raw datasets (about 16 GB); reproduce with `make fetch`
+data/raw/
+
+# Processed tables are rebuilt with `make data`. Reports, manifests and web/data are committed.
+# webdip_finished.parquet also holds webDiplomacy user IDs and must stay private.
+data/processed/*.parquet
+data/processed/**/*.parquet
+data/processed/phases_chunks_*/
+data/processed/.*/
+
+# Local-only agent files; never publish
+CLAUDE.local.md
+.claude/
+thoughts/
+.superpowers/
