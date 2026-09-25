@@ -1,0 +1,9 @@
+{
+  "name": "diplomacy-lab",
+  "private": true,
+  "type": "module",
+  "description": "Static site tests; the site itself has no build step or dependencies.",
+  "scripts": {
+    "test": "node --test \"tests/web/*.test.js\""
+  }
+}

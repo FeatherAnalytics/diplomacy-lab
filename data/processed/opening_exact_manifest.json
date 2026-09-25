@@ -1,0 +1,271 @@
+{
+  "schema_version": 1,
+  "built_at_utc": "2026-09-25T20:42:18.765672+00:00",
+  "python_version": "3.12.11",
+  "polars_version": "1.44.2",
+  "config": {
+    "matching": "exact_only",
+    "min_games": 200,
+    "top_n": 5
+  },
+  "counts": {
+    "candidate_games": 37203,
+    "excluded_non_s1901_games": 1,
+    "included_games": 37202,
+    "observations": 260414,
+    "distinct_openings": 1873,
+    "exact_observations": 520828,
+    "sequence_patterns": 63202,
+    "joint_profiles": 72944,
+    "own_rate_rows": 215167,
+    "pair_coverage_rows": 336,
+    "pair_example_rows": 1680
+  },
+  "inputs": [
+    {
+      "name": "games.parquet",
+      "size_bytes": 3112717,
+      "mtime_ns": 1789138012447904679,
+      "sha256": "914242d35b43b4f384dd2314e78a0734757088df67b1ea288c6b868d1eea60b4"
+    },
+    {
+      "name": "phases.parquet",
+      "size_bytes": 555814160,
+      "mtime_ns": 1789138797660844200,
+      "sha256": "5785ac8a77e9bc1163ca099493b8b92084a929948b92b1048ffe13bdd76c22e5"
+    },
+    {
+      "name": "game_outcomes.parquet",
+      "size_bytes": 4370591,
+      "mtime_ns": 1790351294819083451,
+      "sha256": "944e0efa44c68b0946449c4fcad576d2e09d823aea1053117cc870d51746b7a5"
+    }
+  ],
+  "sources": [
+    {
+      "name": "exact_openings.py",
+      "size_bytes": 8034,
+      "mtime_ns": 1790368036181722285,
+      "sha256": "36db078aecd568723028a3bd4d7a9c7941ae6c622ccfa6f31c277a07d04cf921"
+    },
+    {
+      "name": "__init__.py",
+      "size_bytes": 73,
+      "mtime_ns": 1790368036183615616,
+      "sha256": "22b909a5237a6455e90719cde77958b95f5eb2211325c204444c81e610d54a6f"
+    },
+    {
+      "name": "artifacts.py",
+      "size_bytes": 1650,
+      "mtime_ns": 1790368036185464447,
+      "sha256": "066673f7e58094e0c22403b442892aad489c4c15fbe3f74106307c1e8d97d801"
+    },
+    {
+      "name": "cohorts.py",
+      "size_bytes": 900,
+      "mtime_ns": 1790368036182291659,
+      "sha256": "2a05868cc8514cc3a09d5add242ea2b5e6778d966c5e4c0e5feb7d764f57b0a8"
+    },
+    {
+      "name": "exact_data.py",
+      "size_bytes": 6636,
+      "mtime_ns": 1790368036186767237,
+      "sha256": "f29712fedbc2476563192c175a63461e9734a9a6369b6f910e06928e2adcc9ac"
+    },
+    {
+      "name": "exact_pair_report.py",
+      "size_bytes": 5803,
+      "mtime_ns": 1790368036183241658,
+      "sha256": "afe5f85fe649cca433bf0432855ef889f9766c9b6563f6dbcd0a809f80be3ff7"
+    },
+    {
+      "name": "exact_pairs.py",
+      "size_bytes": 3492,
+      "mtime_ns": 1790368036185109781,
+      "sha256": "42dd9798320decae16913823daa24852c782a180738d0ccfdea3abc17d13c0e0"
+    },
+    {
+      "name": "exact_query.py",
+      "size_bytes": 5501,
+      "mtime_ns": 1790368036185917780,
+      "sha256": "0b9e483214e880ffad270d2488448defa20a6f5e9d074c0e2135bbca3155dbc7"
+    },
+    {
+      "name": "exact_report.py",
+      "size_bytes": 7010,
+      "mtime_ns": 1790368036183059533,
+      "sha256": "657e7154000c4b41a5c2171434ccf046d626734fcab198c2da19c4f87995b9a4"
+    },
+    {
+      "name": "opening_data.py",
+      "size_bytes": 5817,
+      "mtime_ns": 1790368036184739073,
+      "sha256": "24ead36ed9d017cd3feb89e44f158c355c35a967aa42c3bfa8ff4f051f0632d5"
+    },
+    {
+      "name": "opening_report.py",
+      "size_bytes": 5023,
+      "mtime_ns": 1790368036184338823,
+      "sha256": "633d7ba291901523af4d3a69bcc3b7b4133eeb6dd5e1e59cf8a17d3ed5823cfd"
+    },
+    {
+      "name": "opening_stats.py",
+      "size_bytes": 2951,
+      "mtime_ns": 1790368036182540367,
+      "sha256": "5041d9a7ed00b5e6d1a4e287ac73598896430c1e9b7d799d9f5029b7ca56a312"
+    },
+    {
+      "name": "score_benchmark.py",
+      "size_bytes": 7868,
+      "mtime_ns": 1790368036183992657,
+      "sha256": "74a131aef4aac1b20a7281274a90d2327721d7ab1d9f2e010a94b132363e2e82"
+    }
+  ],
+  "outputs": [
+    {
+      "name": "opening_exact_observations.parquet",
+      "size_bytes": 11793650,
+      "mtime_ns": 1790368938789467104,
+      "sha256": "6fcb17e0fe228b2297aeb93e0c480d038a8e239c7db5a695eac5ef7c97ac2fde"
+    },
+    {
+      "name": "opening_exact_sequences.parquet",
+      "size_bytes": 3364504,
+      "mtime_ns": 1790368938797808594,
+      "sha256": "523059ed247e8ad3e890c77a08f68dcc7f9332979a467f9a0e89ee1e5fc876e5"
+    },
+    {
+      "name": "opening_exact_profiles.parquet",
+      "size_bytes": 8883950,
+      "mtime_ns": 1790368938812812867,
+      "sha256": "43f40988b87ff0abdc86a5c12d1088dedc1057e7a2c96a0b932426ec41d492c9"
+    },
+    {
+      "name": "opening_exact_own_rates.parquet",
+      "size_bytes": 10396825,
+      "mtime_ns": 1790368938829178013,
+      "sha256": "68e14aae7f3c475c83d8d6afb27bb6254779025e15331030367e04850ad1bb67"
+    },
+    {
+      "name": "opening_exact_pair_coverage.parquet",
+      "size_bytes": 10076,
+      "mtime_ns": 1790368938830846969,
+      "sha256": "784eb245e713a96ded92e11c4bfd8eb7958143d3ec4c18b81835326f5439f77a"
+    },
+    {
+      "name": "opening_exact_pair_examples.parquet",
+      "size_bytes": 108052,
+      "mtime_ns": 1790368938831844384,
+      "sha256": "ae2386a3df8c2fe5614f8ece96564d4cd1225b6f5a997b4016631105a95bff04"
+    },
+    {
+      "name": "opening_exact.md",
+      "size_bytes": 116455,
+      "mtime_ns": 1790368938832110801,
+      "sha256": "528b5859c7ba8384e6c9d4c1be45d40dcfdd238a01143ee9e5341f2ab46be908"
+    },
+    {
+      "name": "opening_exact_pairs.md",
+      "size_bytes": 225596,
+      "mtime_ns": 1790368938832277676,
+      "sha256": "103d83abe99a7e3834347a29a53b10387503bc8f56f99acd1db0827d92a44529"
+    }
+  ],
+  "schemas": {
+    "opening_exact_observations.parquet": {
+      "horizon": "String",
+      "game_id": "String",
+      "power": "String",
+      "sequence_id": "String",
+      "press_level": "String",
+      "quality_tier": "Int64",
+      "solo": "Boolean",
+      "survived": "Boolean",
+      "draw_vote": "Boolean",
+      "sos_score": "Float64",
+      "joint_id": "String"
+    },
+    "opening_exact_sequences.parquet": {
+      "horizon": "String",
+      "power": "String",
+      "sequence_id": "String",
+      "sequence_json": "String"
+    },
+    "opening_exact_profiles.parquet": {
+      "horizon": "String",
+      "sequence_ids": "List(String)",
+      "joint_id": "String"
+    },
+    "opening_exact_own_rates.parquet": {
+      "quality_group": "String",
+      "press_level": "String",
+      "power": "String",
+      "sequence_id": "String",
+      "n_games": "UInt32",
+      "n_solos": "UInt32",
+      "solo_rate": "Float64",
+      "survival_rate": "Float64",
+      "draw_rate": "Float64",
+      "mean_sos": "Float64",
+      "cohort_games": "UInt32",
+      "baseline_mean_sos": "Float64",
+      "baseline_solo_rate": "Float64",
+      "frequency": "Float64",
+      "sos_lift": "Float64",
+      "sos_se": "Float64",
+      "sparse": "Boolean",
+      "sos_ci_low": "Float64",
+      "sos_ci_high": "Float64",
+      "solo_ci_low": "Float64",
+      "solo_ci_high": "Float64",
+      "horizon": "String",
+      "n_draws": "UInt32",
+      "n_survived": "UInt32"
+    },
+    "opening_exact_pair_coverage.parquet": {
+      "horizon": "String",
+      "quality_group": "String",
+      "press_level": "String",
+      "cohort_games": "UInt32",
+      "n_patterns": "UInt32",
+      "singleton_patterns": "UInt32",
+      "games_in_repeated_patterns": "UInt32",
+      "patterns_at_threshold": "UInt32",
+      "games_at_threshold": "UInt32",
+      "max_matches": "UInt32",
+      "power_a": "String",
+      "power_b": "String",
+      "min_games": "Int32"
+    },
+    "opening_exact_pair_examples.parquet": {
+      "horizon": "String",
+      "quality_group": "String",
+      "press_level": "String",
+      "sequence_id_a": "String",
+      "sequence_id_b": "String",
+      "n_games": "UInt32",
+      "n_solos_a": "UInt32",
+      "n_draws_a": "UInt32",
+      "n_survived_a": "UInt32",
+      "mean_sos_a": "Float64",
+      "n_solos_b": "UInt32",
+      "n_draws_b": "UInt32",
+      "n_survived_b": "UInt32",
+      "mean_sos_b": "Float64",
+      "power_a": "String",
+      "power_b": "String",
+      "sparse": "Boolean",
+      "solo_rate_a": "Float64",
+      "draw_rate_a": "Float64",
+      "survival_rate_a": "Float64",
+      "solo_rate_b": "Float64",
+      "draw_rate_b": "Float64",
+      "survival_rate_b": "Float64"
+    }
+  },
+  "timings_seconds": {
+    "extract_with_fingerprints": 2.7627,
+    "pair_summary_and_report": 0.6305,
+    "total_before_publish": 3.6371
+  }
+}

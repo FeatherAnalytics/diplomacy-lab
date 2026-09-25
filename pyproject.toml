@@ -1,0 +1,10 @@
+[project]
+name = "diplomacy-lab"
+version = "0.1.0"
+description = "Empirical analysis of 37,000 online Diplomacy games: opening outcomes, exact-match explorer and opening matchup games"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.12"
+dependencies = [
+    "polars>=1.44.2",
+]

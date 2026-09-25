@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'">
+  <meta name="referrer" content="no-referrer">
+  <title>Opening explorer · Diplomacy</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preload" href="fonts/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/BricolageGrotesque-Variable.woff2" as="font" type="font/woff2" crossorigin>
+  <script src="js/theme.js"></script>
+  <link rel="stylesheet" href="css/app.css">
+  <script type="module" src="js/app.js"></script>
+</head>
+<body>
+  <header class="masthead">
+    <a href="index.html" class="brand">Diplomacy <span class="eyebrow">Opening explorer</span></a>
+    <div class="masthead-end">
+      <nav class="site-nav" aria-label="Pages"><a href="index.html" aria-current="page">Explorer</a><a href="matchup.html">Matchups</a></nav>
+      <button id="theme-toggle" type="button" class="theme-toggle" aria-label="Toggle dark mode">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+      </button>
+    </div>
+  </header>
+  <main>
+    <section class="intro">
+      <p class="eyebrow accent">Diplomacy · Spring and Fall 1901</p>
+      <h1 class="display">Explore Diplomacy openings.</h1>
+      <p>Choose recorded orders and compare their historical outcomes. Add countries or turns to narrow the matches.</p>
+    </section>
+    <form id="filters" class="filters" aria-label="Game filters">
+      <label>Communication<select id="press"><option value="all">All press settings</option><option value="no_press">No press</option><option value="press_with_msgs">Private messages</option><option value="public_press">Public press</option></select></label>
+      <label>Game quality<select id="quality" aria-describedby="quality-description"><option value="tier_1">Tier 1 only</option><option value="tiers_1_3">Tiers 1–3</option></select></label>
+      <button id="reset" type="button" class="text-button">Reset selections</button>
+    </form>
+    <p id="window-note" class="filter-note">Choose orders one turn at a time, from Spring 1901 through Winter adjustments. Each selected turn narrows the results; unselected turns may vary. Failed attempts are included.</p>
+    <details class="quality-help">
+      <summary>What does game quality mean?</summary>
+      <p id="quality-description">These tiers measure game length and signs of players dropping out, not player skill. Tiers 1–3 have a resolved turn in 1904 or later.</p>
+      <ul>
+        <li><strong>Tier 1:</strong> No detected terminal dropout.</li>
+        <li><strong>Tier 2:</strong> At least one detected dropout; every dropout began with at most 2 supply centers.</li>
+        <li><strong>Tier 3:</strong> At least one dropout began with 3 or more supply centers.</li>
+        <li><strong>Tier 4 (excluded):</strong> The last resolved turn was before 1904.</li>
+      </ul>
+      <p>We flag a terminal dropout when all of a country’s units hold for at least 3 consecutive movement turns through elimination or the end of the record. Intentional holds can trigger this flag; short absences or players who resume moving will not. Tier 1 therefore does not guarantee uninterrupted play.</p>
+    </details>
+    <section class="selection-bar" aria-label="Selected openings">
+      <div id="constraints"></div>
+      <p id="selection-hint">Choose an opening below to narrow the results.</p>
+    </section>
+    <nav class="mobile-nav" aria-label="Explorer sections"><a href="#browse-title">Choose openings</a><a href="#results-title">See outcomes</a></nav>
+    <div id="error" role="alert" hidden><span id="error-message"></span> <button id="retry" type="button">Try again</button> <a href="index.html">Reset explorer</a></div>
+    <p id="activity" class="sr-only" role="status" aria-live="polite">Loading opening histories.</p>
+    <div id="workspace" class="workspace" aria-busy="true">
+      <section class="browser" aria-labelledby="browse-title">
+        <div class="section-heading"><h2 id="browse-title">Choose an opening</h2><span id="choice-count"></span></div>
+        <div id="countries" class="countries" role="group" aria-label="Country to browse"></div>
+        <div id="turn-picker">
+          <p class="quiet">Browse a turn, then select its orders. Unselected turns may vary.</p>
+          <div id="turns" class="turns" role="group" aria-label="Turn to browse"></div>
+        </div>
+        <div class="choice-controls">
+          <div class="search-row"><label for="order-search">Search recorded orders</label><input id="order-search" type="search" maxlength="80" placeholder="e.g. A PAR - BUR" autocomplete="off"></div>
+          <div class="search-row"><label for="sort">Sort openings</label><select id="sort"><option value="frequency">Frequency</option><option value="mean_score">Historical mean score</option></select></div>
+        </div>
+        <label id="sparse-sort" class="toggle" hidden><input id="rank-sparse" type="checkbox">Allow sparse samples at the top</label>
+        <label class="toggle"><input id="show-estimates" type="checkbox" aria-describedby="estimate-context">Show estimated scores (experimental)</label>
+        <p id="estimate-context" class="quiet" hidden></p>
+        <p id="choice-context" class="quiet">Choices are ordered by frequency.</p>
+        <p id="score-context" class="quiet"></p>
+        <p id="baseline-context" class="quiet"></p>
+        <details class="choice-help"><summary>How scores and comparisons work</summary>
+          <p>Estimated score blends an opening’s mean with that country’s overall mean, giving the overall mean more weight when few games match. Both come from the same fitting subset, which excludes the benchmark’s test games. “Fitting matches” counts games with these exact orders in that subset; historical results use all included games. “Baseline only” means the model uses the country average without an opening-specific adjustment.</p>
+          <p>This experimental estimate applies to one country’s complete 1901 orders with All press settings. Select the other four turns, including “No recorded orders” where applicable; each card then estimates the complete year, not that turn alone. It is not a forecast made before Spring.</p>
+          <p>The benchmark found modest improvements over the country average in held-out games from this dataset. Estimates are not evidence that choosing these orders causes a score gain, and may not generalize to new players or future games. Sorting still uses historical means.</p>
+          <p>Historical mean score is this country’s average final score, from 0 to 1. A solo gives the winner 1 and everyone else 0, including countries that survived. In a draw, each country scores its final supply-center count squared, divided by the sum of those squares across all seven countries.</p>
+          <p>The baseline is this country’s average across all eligible games, with each game weighted equally. It includes the displayed choice and its alternatives. Other country and turn selections still apply; only the choice you are browsing is unrestricted. Search, sorting and pagination do not change it.</p>
+          <p>For example, a mean of 0.18 against a baseline of 0.15 gives +0.03 (+20.0%). The percentage is relative to the baseline score, not a change in win probability. It is unavailable when the baseline is zero.</p>
+          <p>These comparisons describe recorded outcomes. They do not show that choosing an opening caused a better result. Sparse samples contain few matching games; passing the sample threshold does not guarantee reliability.</p>
+        </details>
+        <div id="choices" class="choices"></div>
+        <p id="choices-empty" class="empty" hidden>No recorded orders match. Clear the search, remove a country or turn selection, or change the filters.</p>
+        <nav class="pagination" aria-label="Opening pages"><button id="previous" type="button">Previous</button><span id="page-range"></span><button id="next" type="button">Next</button></nav>
+      </section>
+      <aside class="results" aria-labelledby="results-title">
+        <div class="results-heading"><h2 id="results-title">Historical outcomes</h2><span id="evidence" class="evidence">Loading</span></div>
+        <div class="match-summary"><strong id="match-count" data-count="0">—</strong><div><span id="match-label">matching games</span><small id="cohort-count"></small></div></div>
+        <p id="result-note" class="result-note">Loading results…</p>
+        <div class="table-scroll"><table id="outcomes"><caption class="sr-only">Outcomes by country among matching games</caption><thead><tr><th scope="col">Country</th><th scope="col">Solo</th><th scope="col">In draw</th><th scope="col" title="Still held supply centers when another country soloed; excludes Solo and In draw">Survived</th><th scope="col" title="Eliminated: zero supply centers at the end">Eliminated</th><th scope="col">Mean score</th></tr></thead><tbody></tbody></table></div>
+        <p class="table-key">Survived excludes Solo and In draw. The four outcomes total 100% before rounding. A solid neutral cell marks each column’s best value; crimson marks its worst. Higher is better except for Eliminated. Ties share highlights; equal-value columns stay neutral.</p>
+        <details class="method"><summary>Outcome definitions and limits</summary>
+          <ul>
+            <li><strong>Solo:</strong> Finished with at least 18 supply centers.</li>
+            <li><strong>In draw:</strong> Held supply centers in a game classified as a draw.</li>
+            <li><strong>Survived:</strong> Held supply centers when another country soloed.</li>
+            <li><strong>Eliminated:</strong> Finished with no supply centers.</li>
+          </ul>
+          <p>Each table row describes that country in the matching games. Each card describes games with those orders. With one game, Yes/No shows its recorded outcome.</p>
+          <p>Draws are inferred from empty orders at the end of the record, not confirmed site results. Games with unknown endings are excluded, so these results describe only the included sample.</p>
+          <p>A match requires all selected orders in the same game. Other countries and turns may differ. Later turns reflect earlier events; identical selected orders can still occur on different boards.</p>
+        </details>
+      </aside>
+    </div>
+    <footer class="eyebrow"><span id="data-note">Loading data snapshot…</span><span>Historical evidence. Exact orders.</span></footer>
+  </main>
+  <noscript><p>This explorer needs JavaScript. The Markdown reports are in the project repository.</p></noscript>
+</body>
+</html>

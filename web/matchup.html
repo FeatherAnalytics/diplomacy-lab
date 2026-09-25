@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'">
+  <meta name="referrer" content="no-referrer">
+  <title>Opening matchups · Diplomacy</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preload" href="fonts/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/BricolageGrotesque-Variable.woff2" as="font" type="font/woff2" crossorigin>
+  <script src="js/theme.js"></script>
+  <link rel="stylesheet" href="css/app.css">
+  <script type="module" src="js/matchup.js"></script>
+</head>
+<body>
+  <header class="masthead">
+    <a href="index.html" class="brand">Diplomacy <span class="eyebrow">Opening explorer</span></a>
+    <div class="masthead-end">
+      <nav class="site-nav" aria-label="Pages"><a href="index.html">Explorer</a><a href="matchup.html" aria-current="page">Matchups</a></nav>
+      <button id="theme-toggle" type="button" class="theme-toggle" aria-label="Toggle dark mode">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+      </button>
+    </div>
+  </header>
+  <main>
+    <section class="intro">
+      <p class="eyebrow accent">Game theory · Spring 1901</p>
+      <h1 class="display">Opening matchups.</h1>
+      <p>Treat two countries’ most common Spring openings as a two-player game. Each cell’s payoffs are the mean final scores from games where that exact pair of openings was played.</p>
+    </section>
+    <form id="matchup-filters" class="filters" aria-label="Matchup settings">
+      <label>Row country<select id="power-a"></select></label>
+      <label>Column country<select id="power-b"></select></label>
+      <label>Choose openings<select id="rank-by"><option value="frequency">Most common</option><option value="mean_score">Highest mean score</option></select></label>
+      <label>Openings each<select id="top-k"><option value="2">Top 2</option><option value="3">Top 3</option><option value="4">Top 4</option><option value="5">Top 5</option></select></label>
+      <label>Communication<select id="press"><option value="all">All press settings</option><option value="no_press">No press</option><option value="press_with_msgs">Private messages</option><option value="public_press">Public press</option></select></label>
+      <label>Game quality<select id="quality"><option value="tier_1">Tier 1 only</option><option value="tiers_1_3">Tiers 1–3</option></select></label>
+    </form>
+    <p id="coverage" class="filter-note">Loading matchup…</p>
+    <div id="error" role="alert" hidden><span id="error-message"></span> <button id="retry" type="button">Try again</button></div>
+    <p id="activity" class="sr-only" role="status" aria-live="polite"></p>
+
+    <div id="matchup" class="matchup" aria-busy="true">
+      <section class="mix-summary" aria-labelledby="mix-title">
+        <h2 id="mix-title">Against the historical mix</h2>
+        <p class="quiet">If the other country keeps choosing openings as often as players historically did, how much could this country gain by always playing its single best reply?</p>
+        <div id="mix-cards" class="mix-cards"></div>
+        <div id="equilibria" class="equilibria"></div>
+      </section>
+      <section aria-labelledby="matrix-title">
+        <div class="section-heading"><h2 id="matrix-title">Payoff table</h2><span id="matrix-size" class="eyebrow"></span></div>
+        <div class="matrix-layout">
+          <div class="matrix-frame">
+            <p id="column-country" class="axis-label axis-columns" aria-hidden="true"></p>
+            <p id="row-country" class="axis-label axis-rows" aria-hidden="true"></p>
+            <div class="table-scroll"><table id="matrix" class="matrix"><caption id="matrix-caption" class="sr-only">Mean final scores for each pair of openings</caption><thead></thead><tbody></tbody></table></div>
+          </div>
+          <aside class="matrix-legend" aria-labelledby="legend-title">
+            <h3 id="legend-title" class="eyebrow">Reading the table</h3>
+            <dl class="legend-symbols">
+              <dt><span class="eyebrow">ENG</span> <strong>0.158</strong></dt><dd>Mean final score, 0–1. A solo scores 1 for the winner and 0 for everyone else.</dd>
+              <dt><span class="eyebrow">14.4%</span></dt><dd>Share of this table’s games. Hover for the count.</dd>
+              <dt><strong>▲</strong></dt><dd>Best reply: highest score against the other country’s opening.</dd>
+              <dt><strong>△</strong></dt><dd>Best reply, but within noise of the runner-up.</dd>
+              <dt><span class="legend-swatch" aria-label="Solid cell"></span></dt><dd>Pure equilibrium: each opening is a best reply to the other.</dd>
+              <dt><span class="eyebrow">Sparse</span></dt><dd>Fewer than <span id="sparse-threshold">200</span> games.</dd>
+            </dl>
+            <h3 class="eyebrow">Terms</h3>
+            <dl class="legend-terms">
+              <dt>Historical mix</dt><dd>How often each opening was chosen in this table’s games. Expected scores assume the two countries choose independently.</dd>
+              <dt>Highest mean score</dt><dd>Ranks only openings with at least <span id="score-threshold">200</span> games under these filters.</dd>
+            </dl>
+          </aside>
+        </div>
+      </section>
+    </div>
+    <footer class="eyebrow"><span id="data-note">Loading data snapshot…</span><span>Descriptive payoffs. Not causal.</span></footer>
+  </main>
+  <noscript><p>This page needs JavaScript.</p></noscript>
+</body>
+</html>
